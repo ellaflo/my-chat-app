@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 
-// Imports HTTP and CORS library
 const http = require('http').Server(app);
 const cors = require('cors');
 
@@ -16,28 +15,30 @@ let users = [];
 
 socketIO.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
+  
   socket.on('message', (data) => {
     socketIO.emit('messageResponse', data);
   });
 
-  //Listens when a new user joins the server
   socket.on('newUser', (data) => {
-    //Adds the new user to the list of users
     users.push(data);
-    // console.log(users);
-    //Sends the list of users to the client
     socketIO.emit('newUserResponse', users);
   });
 
   socket.on('disconnect', () => {
     console.log('🔥: A user disconnected');
-    //Updates the list of users when a user disconnects from the server
     users = users.filter((user) => user.socketID !== socket.id);
-    // console.log(users);
-    //Sends the list of users to the client
     socketIO.emit('newUserResponse', users);
     socket.disconnect();
   });
+});
+
+// Add a new endpoint that allows a client to send a message to the server
+app.post('/api/message', (req, res) => {
+  const message = req.body.message;
+  // Do something with the message, like emit it to all connected clients
+  socketIO.emit('messageResponse', message);
+  res.send('Message sent successfully!');
 });
 
 app.get('/api', (req, res) => {
@@ -46,6 +47,6 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

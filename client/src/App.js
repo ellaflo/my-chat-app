@@ -5,7 +5,13 @@ import ChatPage from './components/ChatPage';
 import socketIO from 'socket.io-client';
 
 const socket = socketIO.connect('http://localhost:4000');
+
 function App() {
+  if(navigator.userAgentData && navigator.userAgentData.brands.length > 0) {
+    const browserName = navigator.userAgentData.brands[0].brand;
+    console.log(`Browser: ${browserName}`);
+  }
+
   return (
     <BrowserRouter>
       <div>
