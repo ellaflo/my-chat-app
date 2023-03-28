@@ -11,10 +11,11 @@ const ChatBody = ({messages, typingStatus, lastMessageRef}) => {
     window.location.reload()
   }
   
+  // Rendering the chat body
   return (
     <>
       <header className='chat__mainHeader'>
-          <p>Hangout with Colleagues</p>
+          <p>Chat with Colleagues</p>
           <button className='leaveChat__btn' onClick={handleLeaveChat}>LEAVE CHAT</button>
         </header>
 

@@ -8,10 +8,12 @@ const ChatPage = ({socket}) => {
   const [typingStatus, setTypingStatus] = useState("")
   const lastMessageRef = useRef(null);
 
+  // Listen for message responses from the server and update the messages state
   useEffect(()=> {
     socket.on("messageResponse", data => setMessages([...messages, data]))
   }, [socket, messages])
 
+  // Listen for typing responses from the server and update the typing status
   useEffect(()=> {
     socket.on("typingResponse", data => setTypingStatus(data))
   }, [socket])

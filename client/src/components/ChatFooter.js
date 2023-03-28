@@ -4,6 +4,7 @@ const ChatFooter = ({socket}) => {
     const [message, setMessage] = useState("")
     const handleTyping = () => socket.emit("typing",`${localStorage.getItem("userName")} is typing`)
 
+    // event handler function to emit a "message" event to the server
     const handleSendMessage = (e) => {
         e.preventDefault()
         if(message.trim() && localStorage.getItem("userName")) {
