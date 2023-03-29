@@ -55,6 +55,6 @@ app.post("/api/username", (req, res) => {
   res.json({ message: "Username added successfully" })
 })
    
-http.listen(PORT, () => {
+http.listen(process.env.PORT || PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });

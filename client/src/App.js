@@ -4,7 +4,7 @@ import ChatPage from "./components/ChatPage";
 import socketIO from "socket.io-client"
 
 // Connect to the server using Socket.IO
-const socket = socketIO.connect("http://localhost:4000")
+const socket = socketIO.connect("https://serene-inlet-35467.herokuapp.com/")
 function App() {
   return (
     <BrowserRouter>
