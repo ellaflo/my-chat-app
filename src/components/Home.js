@@ -16,7 +16,7 @@ const Home = ({socket}) => {
 
      // Send a POST request to the server with the username
      // eslint-disable-next-line
-      const response = await fetch("http://localhost:4000/api/username", {
+      const response = await fetch("https://serene-inlet-35467.herokuapp.com/api/username", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
